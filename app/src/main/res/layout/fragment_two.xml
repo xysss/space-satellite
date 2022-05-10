@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+    <com.xysss.keeplearning.app.widget.CustomToolBar
+        android:id="@+id/customTwoToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize" />
+
+    <FrameLayout
+        android:id="@+id/viewpager_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_492"
+        android:padding="2dp">
+
+        <net.lucode.hackware.magicindicator.MagicIndicator
+            android:id="@+id/magic_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp" />
+    </FrameLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:background="@color/color_8FF"
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_home_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.xysss.keeplearning.app.widget.CustomToolBar
+        android:id="@+id/customToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/blueLink"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="20dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/blueTv"
+            android:layout_width="wrap_content"
+            android:text="未连接设备"
+            android:textSize="13sp"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/blueLinkImg"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_gravity="center"
+            android:src="@drawable/no_connected_icon"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/testBackgroundImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/test_background"
+        app:layout_constraintTop_toBottomOf="@+id/customToolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:id="@+id/testImg"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/customToolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/start_icon"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/testText"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="65dp"
+        android:textSize="20sp"
+        android:text="开始"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/customToolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:id="@+id/concentrationNum"
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="45sp"
+        android:text="6688"
+        android:includeFontPadding="false"
+        android:textColor="@color/color_AFF"
+        app:layout_constraintTop_toBottomOf="@+id/testBackgroundImg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/concentrationUnit"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="12dp"
+        android:textSize="20sp"
+        android:text="ppm"
+        android:textColor="@color/color_AFF"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/testBackgroundImg"
+        app:layout_constraintLeft_toRightOf="@+id/concentrationNum"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/materialName"
+        android:layout_width="wrap_content"
+        android:textSize="20sp"
+        android:text="异丁烯"
+        android:gravity="center"
+        android:textColor="@color/color_AFF"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/concentrationNum"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/toServiceBackImg"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/to_service_background"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialName" />
+
+    <ImageView
+        android:id="@+id/to_service_icon_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/to_service_icon"
+        android:layout_marginTop="88dp"
+        android:layout_marginStart="75dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialName" />
+
+    <TextView
+        android:id="@+id/servicesTex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="14dp"
+        android:text="开启上传"
+        android:textSize="20sp"
+        android:textColor="@color/color_995"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/to_service_icon_img" />
+
+    <ImageView
+        android:id="@+id/synRecordBackgroundImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/syn_record_background"
+        app:layout_constraintLeft_toRightOf="@+id/toServiceBackImg"
+        app:layout_constraintTop_toBottomOf="@+id/materialName" />
+
+    <ImageView
+        android:id="@+id/syn_record_icon_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/syn_record_icon"
+        android:layout_marginTop="35dp"
+        android:layout_marginStart="77dp"
+        app:layout_constraintLeft_toRightOf="@+id/toServiceBackImg"
+        app:layout_constraintTop_toBottomOf="@+id/materialName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:textColor="@color/color_9FB"
+        android:text="同步数据信息"
+        android:textSize="20sp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintLeft_toRightOf="@+id/toServiceBackImg"
+        app:layout_constraintTop_toBottomOf="@+id/syn_record_icon_img" />
+
+    <ImageView
+        android:id="@+id/synAlarmBackgroundImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/syn_alarm_background"
+        app:layout_constraintLeft_toRightOf="@+id/toServiceBackImg"
+        app:layout_constraintTop_toBottomOf="@+id/synRecordBackgroundImg" />
+
+    <ImageView
+        android:id="@+id/syn_alarm_icon_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/syn_alarm_icon"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="77dp"
+        app:layout_constraintLeft_toRightOf="@+id/toServiceBackImg"
+        app:layout_constraintTop_toBottomOf="@+id/synRecordBackgroundImg" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="同步报警信息"
+        android:textSize="20sp"
+        android:layout_marginTop="14dp"
+        android:textColor="@color/color_92D"
+        app:layout_constraintLeft_toRightOf="@+id/toServiceBackImg"
+        app:layout_constraintTop_toBottomOf="@+id/syn_alarm_icon_img" />
+
+    <LinearLayout
+        android:visibility="invisible"
+        android:id="@+id/syn_lin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toServiceBackImg"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/syn_history_icon_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/syn_history_icon" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="同步中"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:layout_marginStart="7dp" />
+        <TextView
+            android:id="@+id/syn_num_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0%"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:layout_marginStart="1dp" />
+    </LinearLayout>
+
+    <!--    android:indeterminate="true"-->
+    <ProgressBar
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:id="@+id/progress_bar"
+        android:progressDrawable="@drawable/progress_bg"
+        android:max="100"
+        app:layout_constraintTop_toBottomOf="@+id/syn_lin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        style="?android:attr/progressBarStyleHorizontal"/>
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/numShowText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0/0"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        app:layout_constraintTop_toBottomOf="@+id/progress_bar"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="20dp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/customToolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_40"
+            android:gravity="center"
+            android:text="点我去登录界面"
+            app:layout_constraintBottom_toTopOf="@+id/testPageBtn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <Button
+            android:id="@+id/getPermission"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="申请权限"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+
+        <Button
+            android:id="@+id/testRoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="测试数据库"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+
+        <Button
+            android:id="@+id/testPageBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点我去测试Fragment界面"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+
+        <Button
+            android:id="@+id/testListBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点我去测试List界面"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+
+        <Button
+            android:id="@+id/testDownload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击我下载文件"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+
+        <Button
+            android:id="@+id/testUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击我上传文件"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+
+        <Button
+            android:id="@+id/testCrash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击测试捕获异常"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+
+        <Button
+            android:id="@+id/linkBlueTooth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击去连接ble蓝牙"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+
+        <TextView
+            android:id="@+id/testUpdateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="进度：==" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
