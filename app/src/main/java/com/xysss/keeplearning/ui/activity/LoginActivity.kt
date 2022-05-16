@@ -1,6 +1,7 @@
 package com.xysss.keeplearning.ui.activity
 
 import android.os.Bundle
+import android.view.MotionEvent
 import android.widget.CompoundButton
 import com.xysss.keeplearning.R
 import com.xysss.keeplearning.app.api.NetUrl
@@ -54,6 +55,8 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         mViewBinding.showPassword.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             //showPwd(mViewBinding.passwordEdt,isChecked)
         })
+
+
     }
 
     /**

@@ -12,11 +12,17 @@ import android.content.ServiceConnection
 import android.graphics.Color
 import android.os.Bundle
 import android.os.IBinder
+import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import com.blankj.utilcode.util.ServiceUtils.bindService
 import com.blankj.utilcode.util.ToastUtils
 import com.gyf.immersionbar.ktx.immersionBar
+import com.serial.port.kit.core.common.TypeConversion
+import com.serial.port.manage.data.WrapReceiverData
+import com.serial.port.manage.data.WrapSendData
+import com.serial.port.manage.listener.OnDataPickListener
+import com.serial.port.manage.listener.OnDataReceiverListener
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.bugly.crashreport.CrashReport
 import com.xysss.keeplearning.R
@@ -29,6 +35,12 @@ import com.xysss.keeplearning.app.util.FileUtils
 import com.xysss.keeplearning.data.annotation.ValueKey
 import com.xysss.keeplearning.data.repository.Repository
 import com.xysss.keeplearning.databinding.FragmentOneBinding
+import com.xysss.keeplearning.serialport.SenderManager
+import com.xysss.keeplearning.serialport.SerialPortHelper
+import com.xysss.keeplearning.serialport.listener.OnReadSystemStateListener
+import com.xysss.keeplearning.serialport.listener.OnReadVersionListener
+import com.xysss.keeplearning.serialport.model.DeviceVersionModel
+import com.xysss.keeplearning.serialport.model.SystemStateModel
 import com.xysss.keeplearning.ui.activity.*
 import com.xysss.keeplearning.viewmodel.BlueToothViewModel
 import com.xysss.mvvmhelper.base.appContext
@@ -45,6 +57,9 @@ import java.util.*
  */
 
 class OneFragment : BaseFragment<BlueToothViewModel, FragmentOneBinding>(){
+    companion object {
+        private const val TAG = "OneFragment"
+    }
     private var downloadApkPath = ""
     private lateinit var mService: MQTTService
     private var loadingDialogEntity=LoadingDialogEntity()
@@ -82,8 +97,8 @@ class OneFragment : BaseFragment<BlueToothViewModel, FragmentOneBinding>(){
         mViewModel.setCallBack()
 
         //去连接蓝牙
-        val intentBle = Intent(appContext, LinkBleBlueToothActivity::class.java)
-        requestDataLauncher.launch(intentBle)
+//        val intentBle = Intent(appContext, LinkBleBlueToothActivity::class.java)
+//        requestDataLauncher.launch(intentBle)
         //请求权限
         requestCameraPermissions()
     }
@@ -93,6 +108,14 @@ class OneFragment : BaseFragment<BlueToothViewModel, FragmentOneBinding>(){
         immersionBar {
             titleBar(mViewBinding.customToolbar)
         }
+        // 增加统一监听回调
+        SerialPortHelper.portManager.addDataPickListener(onDataPickListener)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // 移除统一监听回调
+        SerialPortHelper.portManager.removeDataPickListener(onDataPickListener)
     }
 
     @SuppressLint("ResourceAsColor", "SetTextI18n")
@@ -187,35 +210,63 @@ class OneFragment : BaseFragment<BlueToothViewModel, FragmentOneBinding>(){
         ) {
             when (it.id) {
                 R.id.blueLink->{
-                    val intentBle = Intent(appContext, LinkBleBlueToothActivity::class.java)
-                    requestDataLauncher.launch(intentBle)
+                    SerialPortHelper.readSystemState(object : OnReadSystemStateListener {
+                        override fun onResult(systemStateModel: SystemStateModel) {
+                            Log.d(TAG, "onResult: $systemStateModel")
+                        }
+                    })
                 }
                 R.id.testBackgroundImg->{
-                    if(isClickStart)
-                        startTest()
-                    else
-                        stopTest()
+                    // 发送数据
+                    SerialPortHelper.portManager.send(
+                        WrapSendData(
+                        SenderManager.getSender().sendStartDetect()
+                    ),
+                        object : OnDataReceiverListener {
+                            override fun onSuccess(data: WrapReceiverData) {
+                                Log.d(TAG, "响应数据：${TypeConversion.bytes2HexString(data.data)}")
+                            }
+
+                            override fun onFailed(wrapSendData: WrapSendData, msg: String) {
+                                Log.e(
+                                    TAG,
+                                    "发送数据: ${TypeConversion.bytes2HexString(wrapSendData.sendData)}, $msg"
+                                )
+                            }
+
+                            override fun onTimeOut() {
+                                Log.e(TAG, "发送或者接收超时")
+                            }
+                        })
                 }
                 R.id.toServiceBackImg->{
-                    if (mmkv.getString(ValueKey.deviceId,"")!=""){
-                        recTopic= mmkv.getString(ValueKey.recTopicValue, "").toString()
-                        sendTopic= mmkv.getString(ValueKey.sendTopicValue, "").toString()
-
-                        if (isConnectMqtt){
-                            mViewBinding.servicesTex.text="开启上传"
-                            mService.mpttDisconnect()
-                        }else{
-                            mViewBinding.servicesTex.text="关闭上传"
-                            mService.connectMqtt(appContext)
-                        }
+                    // 打开串口
+                    if (!SerialPortHelper.portManager.isOpenDevice) {
+                        val open = SerialPortHelper.portManager.open()
+                        Log.d(TAG, "串口打开${if (open) "成功" else "失败"}")
                     }
 
                 }
                 R.id.synRecordBackgroundImg->{
-                    synMessage(1)
+                    // 关闭串口
+                    val close = SerialPortHelper.portManager.close()
+                    Log.d(TAG, "串口关闭${if (close) "成功" else "失败"}")
                 }
                 R.id.synAlarmBackgroundImg->{
-                    synMessage(2)
+
+                    SerialPortHelper.readVersion(object : OnReadVersionListener {
+                        override fun onResult(deviceVersionModel: DeviceVersionModel) {
+                            Log.d(TAG, "onResult: $deviceVersionModel")
+                        }
+                    })
+
+                    // 切换串口
+//                    val switchDevice = SerialPortHelper.portManager.switchDevice(path = "/dev/ttyS1")
+//                    Log.d(TAG, "串口切换${if (switchDevice) "成功" else "失败"}")
+
+                    // 切换波特率
+//                    val switchDevice = SerialPortHelper.portManager.switchDevice(baudRate = 9600)
+//                    Log.d(TAG, "波特率切换${if (switchDevice) "成功" else "失败"}")
                 }
 
                 //以下为demo按钮
@@ -384,6 +435,7 @@ class OneFragment : BaseFragment<BlueToothViewModel, FragmentOneBinding>(){
         dismissCustomLoading(loadingDialogEntity)
     }
 
+    @SuppressLint("MissingPermission")
     override fun onDestroy() {
         BleHelper.gatt?.close()
         realDataTask?.cancel()
@@ -405,6 +457,12 @@ class OneFragment : BaseFragment<BlueToothViewModel, FragmentOneBinding>(){
                     stopTest()
                 }
             }
+        }
+    }
+
+    private val onDataPickListener: OnDataPickListener = object : OnDataPickListener {
+        override fun onSuccess(data: WrapReceiverData) {
+            Log.d(TAG, "统一响应数据：${TypeConversion.bytes2HexString(data.data)}")
         }
     }
 

@@ -13,8 +13,12 @@
         android:id="@+id/navigationReport"
         android:icon="@drawable/setting_menu"
         android:title="@string/bottom_title_report" />
-<!--    <item-->
-<!--        android:id="@+id/navigationUser"-->
-<!--        android:icon="@drawable/ic_launcher_code"-->
-<!--        android:title="@string/bottom_title_user" />-->
+    <item
+        android:id="@+id/navigationUser"
+        android:icon="@drawable/ic_launcher_code"
+        android:title="@string/bottom_title_user" />
+    <item
+        android:id="@+id/navigationWeather"
+        android:icon="@drawable/ic_launcher_code"
+        android:title="@string/bottom_title_weather" />
 </menu>

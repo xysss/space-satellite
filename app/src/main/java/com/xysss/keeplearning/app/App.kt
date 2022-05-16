@@ -1,6 +1,8 @@
 package com.xysss.keeplearning.app
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
 import com.effective.android.anchors.AnchorsManager
 import com.effective.android.anchors.Project
 import com.xysss.keeplearning.BuildConfig
@@ -14,6 +16,12 @@ import com.xysss.mvvmhelper.ext.currentProcessName
  */
 
 class App: Application() {
+
+    //companion 静态  object 单例
+    companion object {
+        const val WeatherToken = "BhF86VEauO56lSCo" //彩云天气xys申请令牌
+    }
+
     override fun onCreate() {
         super.onCreate()
         MvvmHelper.init(this,BuildConfig.DEBUG)

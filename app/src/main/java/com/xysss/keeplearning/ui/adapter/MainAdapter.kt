@@ -4,10 +4,7 @@ import android.util.SparseArray
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.xysss.keeplearning.ui.fragment.FourFragment
-import com.xysss.keeplearning.ui.fragment.OneFragment
-import com.xysss.keeplearning.ui.fragment.ThreeFragment
-import com.xysss.keeplearning.ui.fragment.TwoFragment
+import com.xysss.keeplearning.ui.fragment.*
 
 /**
  * Author:bysd-2
@@ -21,6 +18,8 @@ class MainAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         const val PAGE_TWO = 1
         const val PAGE_THREE = 2
         const val PAGE_FOUR = 3
+        const val PAGE_FIVE = 4
+
     }
 
     private val fragments: SparseArray<Fragment> = SparseArray()
@@ -30,6 +29,7 @@ class MainAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         fragments.put(PAGE_TWO, TwoFragment())
         fragments.put(PAGE_THREE, ThreeFragment())
         fragments.put(PAGE_FOUR, FourFragment())
+        fragments.put(PAGE_FIVE, PlaceFragment())
     }
 
     override fun createFragment(position: Int): Fragment {

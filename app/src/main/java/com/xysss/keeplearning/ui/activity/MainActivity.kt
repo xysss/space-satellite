@@ -17,7 +17,7 @@ class MainActivity : BaseActivity<TestViewModel, ActivityMainBinding>() {
         //mViewBinding.mainViewPager.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
         mViewBinding.mainViewPager.adapter = MainAdapter(this)
         mViewBinding.mainViewPager.offscreenPageLimit = mViewBinding.mainViewPager.adapter!!.itemCount
-        mViewBinding.mainViewPager.isUserInputEnabled = false
+        mViewBinding.mainViewPager.isUserInputEnabled = true  //true:滑动，false：禁止滑动
         mViewBinding.mainNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigationRead -> {
@@ -29,9 +29,13 @@ class MainActivity : BaseActivity<TestViewModel, ActivityMainBinding>() {
                 R.id.navigationReport -> {
                     mViewBinding.mainViewPager.setCurrentItem(2, false)
                 }
-//                R.id.navigationUser -> {
-//                    mViewBinding.mainViewPager.setCurrentItem(3, false)
-//                }
+                R.id.navigationUser -> {
+                    mViewBinding.mainViewPager.setCurrentItem(3, false)
+                }
+                R.id.navigationWeather -> {
+                    mViewBinding.mainViewPager.setCurrentItem(4, false)
+                }
+
             }
             true
         }

@@ -27,6 +27,10 @@ allprojects {
         google()
         mavenCentral()
         maven { url 'https://www.jitpack.io' }
+        maven {
+            name 'maven-snapshot'
+            url 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+        }
     }
 }
 
