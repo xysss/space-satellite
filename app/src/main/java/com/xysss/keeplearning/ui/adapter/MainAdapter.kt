@@ -29,7 +29,7 @@ class MainAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         fragments.put(PAGE_TWO, TwoFragment())
         fragments.put(PAGE_THREE, ThreeFragment())
         fragments.put(PAGE_FOUR, FourFragment())
-        fragments.put(PAGE_FIVE, PlaceFragment())
+        fragments.put(PAGE_FIVE, FiveFragment())
     }
 
     override fun createFragment(position: Int): Fragment {

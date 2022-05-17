@@ -33,65 +33,7 @@ import rxhttp.wrapper.param.RxHttp
 import java.io.File
 import java.lang.StringBuilder
 
-class BlueToothViewModel : BaseViewModel(), BleCallback.UiCallback {
-    val bleDate: LiveData<MaterialInfo> get() = _bleDate
-    val bleState: LiveData<String> get() = _bleState
-    val progressNum: LiveData<Int> get() = _progressNum
-    val numShow: LiveData<String> get() = _numShow
-
-    private val _bleDate=MutableLiveData<MaterialInfo>()
-    private val _bleState=MutableLiveData<String>()
-    private val _progressNum=MutableLiveData<Int>()
-    private val _numShow=MutableLiveData<String>()
-
-    @SuppressLint("StaticFieldLeak")
-    private lateinit var mService: MQTTService
-
-    //蓝牙回调
-    private val bleCallBack = BleCallback()
-
-    fun setCallBack(){
-        //注册回调
-        bleCallBack.setUiCallback(this)
-    }
-
-    fun putService(service:MQTTService){
-        mService=service
-    }
-
-    fun connectBlueTooth(device: BluetoothDevice?){
-        BleHelper.connectBlueTooth(device,bleCallBack)
-    }
-
-    override fun realData(materialInfo: MaterialInfo) {
-        _bleDate.postValue(materialInfo)
-        materialInfo.toString().logE("xysLog")
-    }
-
-    override fun bleConnected(state:String) {
-        _bleState.postValue(state)
-    }
-
-    override fun synProgress(progress: Int,numShow :String) {
-        _progressNum.postValue(progress)
-        _numShow.postValue(numShow)
-    }
-
-    override fun mqttSendMsg(bytes: ByteArray) {
-        mService.publish(bytes)
-    }
-
-
-
-
-
-
-
-
-
-
-
-
+class BlueToothViewModel : BaseViewModel(){
     /**
      * 下载
      * @param downLoadData Function1<ProgressT<String>, Unit>

@@ -29,12 +29,12 @@
     <uses-permission
         android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" /> <!-- Arms 配置 -->
-    <meta-data
-        android:name="design_width_in_dp"
-        android:value="360" />
-    <meta-data
-        android:name="design_height_in_dp"
-        android:value="640" />
+<!--    <meta-data-->
+<!--        android:name="design_width_in_dp"-->
+<!--        android:value="640" />-->
+<!--    <meta-data-->
+<!--        android:name="design_height_in_dp"-->
+<!--        android:value="400" />-->
 
     <application
         android:requestLegacyExternalStorage="true"
@@ -70,7 +70,7 @@
             android:exported="true" />
         <activity
             android:name=".ui.activity.SplashActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -84,41 +84,41 @@
             android:name=".ui.activity.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
         <activity
             android:name=".ui.activity.TestActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
         <activity
             android:name=".ui.activity.ListActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
         <activity
             android:name=".ui.activity.LoginActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.activity.ErrorActivity"
             android:label="错误界面"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
         <activity
             android:name=".ui.activity.RoomSampleActivity"
             android:label="数据库页面"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
         <activity
             android:name=".ui.activity.LinkBleBlueToothActivity"
             android:label="蓝牙界面"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.BleDemoKotlin"
             />
         <activity
             android:name=".ui.activity.NavigationActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustResize" />
         <provider
             android:name="androidx.core.content.FileProvider"

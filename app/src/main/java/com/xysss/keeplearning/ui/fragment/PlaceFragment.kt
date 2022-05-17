@@ -1,5 +1,6 @@
 package com.xysss.keeplearning.ui.fragment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -22,6 +23,7 @@ class PlaceFragment : BaseFragment<PlaceViewModel, FragmentPlaceBinding>() {
     private lateinit var adapter: PlaceAdapter
 
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun initView(savedInstanceState: Bundle?) {
         if (activity is MainActivity && mViewModel.isPlaceSaved()) {
             val place = mViewModel.getSavedPlace()
@@ -31,7 +33,7 @@ class PlaceFragment : BaseFragment<PlaceViewModel, FragmentPlaceBinding>() {
                 putExtra("place_name", place.name)
             }
             startActivity(intent)
-            activity?.finish()
+            //activity?.finish()
             return
         }
         val layoutManager = LinearLayoutManager(activity)

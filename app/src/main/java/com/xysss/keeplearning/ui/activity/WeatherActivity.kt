@@ -11,6 +11,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.GravityCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.xysss.keeplearning.R
 import com.xysss.keeplearning.app.base.BaseActivity
@@ -122,5 +125,18 @@ class WeatherActivity :BaseActivity<WeatherViewModel,ActivityWeatherBinding>(){
         mViewBinding.lifeIndexInclude.carWashingText.text = lifeIndex.carWashing[0].desc
         mViewBinding.weatherLayout.visibility = View.VISIBLE
     }
+
+//    private fun hideSystemUI() {
+//        WindowCompat.setDecorFitsSystemWindows(window, false)
+//        WindowInsetsControllerCompat(window, window.decorView).let { controller ->
+//            controller.hide(WindowInsetsCompat.Type.systemBars())
+//            controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+//        }
+//    }
+//
+//    private fun showSystemUI() {
+//        WindowCompat.setDecorFitsSystemWindows(window, true)
+//        WindowInsetsControllerCompat(window, window.decorView).show(WindowInsetsCompat.Type.systemBars())
+//    }
 
 }

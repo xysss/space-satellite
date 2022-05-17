@@ -1,6 +1,7 @@
 package com.xysss.keeplearning.ui.activity
 
 import android.os.Bundle
+import androidx.viewpager2.widget.ViewPager2
 import com.blankj.utilcode.util.ToastUtils
 import com.xysss.keeplearning.R
 import com.xysss.keeplearning.app.base.BaseActivity
@@ -18,27 +19,6 @@ class MainActivity : BaseActivity<TestViewModel, ActivityMainBinding>() {
         mViewBinding.mainViewPager.adapter = MainAdapter(this)
         mViewBinding.mainViewPager.offscreenPageLimit = mViewBinding.mainViewPager.adapter!!.itemCount
         mViewBinding.mainViewPager.isUserInputEnabled = true  //true:滑动，false：禁止滑动
-        mViewBinding.mainNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigationRead -> {
-                    mViewBinding.mainViewPager.setCurrentItem(0, false)
-                }
-                R.id.navigationPaper -> {
-                    mViewBinding.mainViewPager.setCurrentItem(1, false)
-                }
-                R.id.navigationReport -> {
-                    mViewBinding.mainViewPager.setCurrentItem(2, false)
-                }
-                R.id.navigationUser -> {
-                    mViewBinding.mainViewPager.setCurrentItem(3, false)
-                }
-                R.id.navigationWeather -> {
-                    mViewBinding.mainViewPager.setCurrentItem(4, false)
-                }
-
-            }
-            true
-        }
     }
 
     /**
