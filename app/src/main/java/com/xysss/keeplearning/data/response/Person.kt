@@ -1,5 +1,6 @@
 package com.xysss.keeplearning.data.response
 
+import com.xysss.keeplearning.app.ext.logFlag
 import com.xysss.mvvmhelper.ext.logD
 import com.xysss.mvvmhelper.ext.logE
 
@@ -9,6 +10,6 @@ import com.xysss.mvvmhelper.ext.logE
  */
 class Person(val age:Int,val name:String) {
     fun print(){
-        "Person"+name + age + "岁了".logE("xysLog")
+        "Person"+name + age + "岁了".logE(logFlag)
     }
 }

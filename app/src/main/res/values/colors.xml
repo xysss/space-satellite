@@ -25,7 +25,7 @@
     <color name="colorBlack333">#333</color>
     <color name="colorBlack666">#666</color>
     <color name="colorBlack6C6">#C6C6C6</color>
-    <color name="color_FEC">#38AFEC</color>
+    <color name="color_FEC">#33FFFFFF</color>
 
     <color name="backgrounGrey">#CCCCCC</color>
     <color name="textHint">#999999</color>

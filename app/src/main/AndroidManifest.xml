@@ -49,13 +49,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute,LockedOrientationActivity"
         tools:replace="android:allowBackup,android:networkSecurityConfig">
-        <service
-            android:name=".app.service.MQTTService"
-            android:enabled="true"
-            android:exported="false"
-            android:priority="1000" />
-        <service android:name="org.eclipse.paho.android.service.MqttService" />
-
         <activity
             android:name=".ui.activity.DemoActivity"
             android:exported="true" />
@@ -108,18 +101,6 @@
             android:label="数据库页面"
             android:launchMode="singleTask"
             android:screenOrientation="landscape" />
-        <activity
-            android:name=".ui.activity.LinkBleBlueToothActivity"
-            android:label="蓝牙界面"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape"
-            android:theme="@style/Theme.BleDemoKotlin"
-            />
-        <activity
-            android:name=".ui.activity.NavigationActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustResize" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

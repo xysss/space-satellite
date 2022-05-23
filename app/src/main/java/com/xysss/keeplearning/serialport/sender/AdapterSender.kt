@@ -2,6 +2,7 @@ package com.xysss.keeplearning.serialport.sender
 
 import com.xysss.keeplearning.serialport.commond.SerialCommandProtocol.onCmdCheckDeviceStatusInfo
 import com.xysss.keeplearning.serialport.commond.SerialCommandProtocol.onCmdReadVersionStatus
+import com.xysss.keeplearning.serialport.commond.SerialCommandProtocol.test
 
 /**
  * 作者 : xys
@@ -17,5 +18,9 @@ class AdapterSender : Sender {
 
     override fun sendReadVersion(): ByteArray {
         return onCmdReadVersionStatus()
+    }
+
+    override fun sendTest(): ByteArray {
+        return test()
     }
 }

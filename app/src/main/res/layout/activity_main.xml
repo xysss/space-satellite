@@ -3,10 +3,82 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@drawable/shape_home_background"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/line1_one"
+        android:layout_width="match_parent"
+        android:layout_height="68px"
+        android:orientation="horizontal"
+        android:background="@color/color_FEC"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="28px"
+            android:layout_marginStart="22px"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="4G"/>
+        <ImageView
+            android:layout_marginStart="22px"
+            android:layout_width="34px"
+            android:layout_gravity="center"
+            android:layout_height="34px"
+            android:src="@drawable/running_model_icon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center"
+            android:textSize="28px"
+            android:layout_marginStart="6px"
+            android:text="自动模式"/>
+        <ImageView
+            android:layout_marginStart="22px"
+            android:layout_width="34px"
+            android:layout_gravity="center"
+            android:layout_height="34px"
+            android:src="@drawable/fan_speed_icon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center"
+            android:textSize="28px"
+            android:layout_marginStart="6px"
+            android:text="五档"/>
+        <ImageView
+            android:layout_marginStart="22px"
+            android:layout_width="34px"
+            android:layout_gravity="center"
+            android:layout_height="34px"
+            android:src="@drawable/filter_element"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center"
+            android:textSize="28px"
+            android:layout_marginStart="6px"
+            android:text="滤芯"/>
+        <TextClock
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="410px"
+            android:layout_gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="28px"
+            android:format24Hour="yyyy年MM月dd日 E HH:mm:ss"/>
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        app:layout_constraintTop_toBottomOf="@+id/line1_one"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/mainViewPager"

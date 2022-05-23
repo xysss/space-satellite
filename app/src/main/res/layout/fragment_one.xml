@@ -7,141 +7,70 @@
     android:background="@drawable/shape_home_background"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="34dp"
-        android:orientation="horizontal"
-        android:background="@color/color_FEC"
-        tools:ignore="MissingConstraints">
+    <Button
+        android:id="@+id/navBtn"
+        android:layout_width="42px"
+        android:layout_height="32px"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/ic_home"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line1_one" />
 
-        <TextClock
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:format24Hour="yyyy年MM月dd日 E HH:mm:ss"/>
-
-
-
-    </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-    <LinearLayout
-        android:visibility="gone"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/placeName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:orientation="vertical"
-        tools:ignore="MissingConstraints">
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="9dp"
+        android:textColor="#F1F9FF"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/line1_one"
+        app:layout_constraintLeft_toRightOf="@+id/navBtn"
+        android:text="顺义区今日天气"/>
 
-        <Button
-            android:id="@+id/loginBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_40"
-            android:gravity="center"
-            android:text="点我去登录界面"
-            app:layout_constraintBottom_toTopOf="@+id/testPageBtn"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
 
-        <Button
-            android:id="@+id/getPermission"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="申请权限"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
 
-        <Button
-            android:id="@+id/testRoom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="测试数据库"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
-
-        <Button
-            android:id="@+id/testPageBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="点我去测试Fragment界面"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
-
-        <Button
-            android:id="@+id/testListBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="点我去测试List界面"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
-
-        <Button
-            android:id="@+id/testDownload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="点击我下载文件"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
-
-        <Button
-            android:id="@+id/testUpload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="点击我上传文件"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
-
-        <Button
-            android:id="@+id/testCrash"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="点击测试捕获异常"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
-
-        <Button
-            android:id="@+id/linkSerialPort"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="点击去连接ble蓝牙"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint1_one"
+        android:layout_marginTop="9dp"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="#66FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placeName">
 
         <TextView
-            android:id="@+id/testUpdateText"
+            android:id="@+id/humidity_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="进度：==" />
+            android:text="湿度"
+            android:textColor="#1E4BA5"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tV2_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="9dp"
+        android:textColor="#F1F9FF"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/constraint1_one"
+        app:layout_constraintLeft_toRightOf="@+id/navBtn"
+        android:text="顺义区今日天气"/>
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

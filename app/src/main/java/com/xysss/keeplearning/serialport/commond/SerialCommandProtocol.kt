@@ -30,6 +30,9 @@ object SerialCommandProtocol : BaseProtocol() {
     var upgrade = byteArrayOf(0xAA.toByte())
     var readyForUpgrade = byteArrayOf(0x01.toByte(), 0x00.toByte(), 0xAB.toByte())
 
+    var testCommond = byteArrayOf(0x55.toByte(), 0x00.toByte(), 0x0A.toByte(), 0x09.toByte(),
+        0x00.toByte(), 0x00.toByte(), 0x01.toByte(), 0x00.toByte(), 0x00.toByte(), 0x23.toByte())
+
     /**
      * 检查机器运行状态信息
      *
@@ -40,6 +43,12 @@ object SerialCommandProtocol : BaseProtocol() {
             baseStart,
             systemState,
             deviceInfo
+        )
+    }
+
+    fun test(): ByteArray {
+        return buildControllerProtocol(
+            testCommond
         )
     }
 

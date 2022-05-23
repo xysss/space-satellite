@@ -46,7 +46,7 @@ class HistoryAlarmFragment :BaseFragment<HistoryAlarmViewModel,FragmentHistoryAl
     override fun initObserver() {
         super.initObserver()
         mViewModel.alarmListData.observe(this){
-            //it.logE("xysLog")
+            //it.logE(logFlag)
             //请求到列表数据
             if (it.datas.size==0){
                 if (it.isRefresh()){

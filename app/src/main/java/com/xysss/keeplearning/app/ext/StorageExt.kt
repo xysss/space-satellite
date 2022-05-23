@@ -27,6 +27,8 @@ val job= Job()
 val scope = CoroutineScope(job)
 var isRecOK=true
 
+val logFlag="xysLog"
+
 const val recordFileName="recordFileName"
 const val alarmFileName="alarmFileName"
 

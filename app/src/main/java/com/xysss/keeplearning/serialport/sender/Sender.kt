@@ -18,4 +18,7 @@ interface Sender {
      * @return true 发送成功
      */
     fun sendReadVersion(): ByteArray
+
+
+    fun sendTest(): ByteArray
 }

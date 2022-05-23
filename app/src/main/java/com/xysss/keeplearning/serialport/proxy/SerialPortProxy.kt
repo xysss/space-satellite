@@ -29,7 +29,6 @@ class SerialPortProxy {
 
     private fun initSdk() {
         searchAllDevices()
-
         serialPortManager = SerialPortKit.newBuilder(appContext)
             // 设备地址
             .path("/dev/ttyS4")
@@ -53,7 +52,6 @@ class SerialPortProxy {
             .addressCheckCall(DataConvertUtil.addressCheckCall())
             .build()
             .get()
-
         isInitSuccess = true
     }
 
