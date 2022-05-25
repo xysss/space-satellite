@@ -1,6 +1,5 @@
 package com.xysss.keeplearning.ui.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +7,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.xysss.keeplearning.R
 import com.xysss.keeplearning.data.response.Place
-import com.xysss.keeplearning.ui.activity.WeatherActivity
-import com.xysss.keeplearning.ui.fragment.PlaceFragment
+import com.xysss.keeplearning.ui.fragment.OneFragment
 
 
-class PlaceAdapter(private val fragment: PlaceFragment, private val placeList: List<Place>) : RecyclerView.Adapter<PlaceAdapter.ViewHolder>() {
+class PlaceAdapter(private val fragment: OneFragment, private val placeList: List<Place>) : RecyclerView.Adapter<PlaceAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val placeName: TextView = view.findViewById(R.id.placeName)
@@ -25,22 +23,12 @@ class PlaceAdapter(private val fragment: PlaceFragment, private val placeList: L
         holder.itemView.setOnClickListener {
             val position = holder.adapterPosition
             val place = placeList[position]
-            val activity = fragment.activity
-            if (activity is WeatherActivity) {
-                activity.mViewBinding.drawerLayout.closeDrawers()
-                activity.mViewModel.locationLng = place.location.lng
-                activity.mViewModel.locationLat = place.location.lat
-                activity.mViewModel.placeName = place.name
-                activity.refreshWeather()
-            } else {
-                val intent = Intent(parent.context, WeatherActivity::class.java).apply {
-                    putExtra("location_lng", place.location.lng)
-                    putExtra("location_lat", place.location.lat)
-                    putExtra("place_name", place.name)
-                }
-                fragment.startActivity(intent)
-                activity?.finish()
-            }
+            fragment.mViewBinding.drawerLayoutOne.closeDrawers()
+            fragment.mViewModel.locationLng = place.location.lng
+            fragment.mViewModel.locationLat = place.location.lat
+            fragment.mViewModel.placeName = place.name
+            fragment.refreshWeather()
+
             fragment.mViewModel.savePlace(place)
         }
         return holder

@@ -7,7 +7,6 @@
     android:background="@drawable/shape_home_background"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint1_three"
         android:layout_marginTop="40px"
@@ -17,6 +16,42 @@
         android:background="#66FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tV15_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="85px"
+            android:layout_marginTop="140px"
+            android:text="PM2.5"
+            android:textSize="40px"
+            android:textColor="#F1F9FF"
+            app:layout_constraintTop_toTopOf="@+id/constraint1_three"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tV16_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20px"
+            android:layout_marginTop="57px"
+            android:text="20"
+            android:textSize="140px"
+            android:textColor="#F1F9FF"
+            app:layout_constraintTop_toTopOf="@+id/constraint1_three"
+            app:layout_constraintStart_toEndOf="@id/tV15_three"/>
+
+        <TextView
+            android:id="@+id/tV17_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20px"
+            android:layout_marginTop="137px"
+            android:text="μg/m"
+            android:textSize="40px"
+            android:textColor="#F1F9FF"
+            app:layout_constraintTop_toTopOf="@+id/constraint1_three"
+            app:layout_constraintStart_toEndOf="@id/tV16_three"/>
 
         <TextView
             android:id="@+id/tV6_three"
@@ -145,7 +180,7 @@
         android:layout_height="23px"
         android:layout_marginTop="48px"
         android:layout_marginStart="20px"
-        android:background="#FFDFB0"
+        android:background="@drawable/yellow_icon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/constraint1_three" />
 
@@ -302,7 +337,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="63px"
+        android:layout_marginTop="58px"
         android:layout_marginStart="12px"
         android:textColor="#FFFFFF"
         android:textSize="34px"
@@ -310,19 +345,165 @@
         app:layout_constraintTop_toBottomOf="@+id/constraint1_three"
         android:text="风速调节" />
 
-    <SeekBar
-        android:id="@+id/seekBar1_three"
-        android:layout_width="930px"
-        android:layout_height="20px"
-        android:layout_marginStart="62px"
-        android:layout_marginEnd="45px"
-        android:layout_marginTop="65px"
+    <RadioGroup
+        android:id="@+id/sceneRadioGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60px"
+        android:layout_marginStart="60px"
         app:layout_constraintStart_toEndOf="@+id/tV4_three"
         app:layout_constraintTop_toBottomOf="@+id/constraint1_three"
-        android:max="100"
-        android:thumb="@drawable/bg_seek_bar_thumb2"
-        android:progressDrawable="@drawable/seekbar_progress"
-        android:progress="60" />
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radiobutton1"
+            android:textSize="32px"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:paddingHorizontal="3dp"
+            android:button="@drawable/radiobutton_selector"
+            android:text="1档" />
+
+        <RadioButton
+            android:id="@+id/radiobutton2"
+            android:textSize="32px"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="80px"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="3dp"
+            android:button="@drawable/radiobutton_selector"
+            android:text="2档" />
+        <RadioButton
+            android:id="@+id/radiobutton3"
+            android:textSize="32px"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="80px"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:paddingHorizontal="3dp"
+            android:button="@drawable/radiobutton_selector"
+            android:text="3档" />
+        <RadioButton
+            android:id="@+id/radiobutton4"
+            android:textSize="32px"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="80px"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:paddingHorizontal="3dp"
+            android:button="@drawable/radiobutton_selector"
+            android:text="4档" />
+        <RadioButton
+            android:id="@+id/radiobutton5"
+            android:textSize="32px"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="80px"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:paddingHorizontal="3dp"
+            android:button="@drawable/radiobutton_selector"
+            android:text="5档" />
+        <RadioButton
+            android:id="@+id/radiobutton6"
+            android:textSize="32px"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="80px"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:paddingHorizontal="3dp"
+            android:button="@drawable/radiobutton_selector"
+            android:text="6档" />
+
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/sceneRadioGroup_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60px"
+        android:layout_marginStart="60px"
+        app:layout_constraintStart_toEndOf="@+id/tV4_three"
+        app:layout_constraintTop_toBottomOf="@+id/tV4_three"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radiobutton1_time"
+            android:textSize="32px"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:paddingHorizontal="3dp"
+            android:button="@drawable/radiobutton_selector"
+            android:text="1小时" />
+
+        <RadioButton
+            android:id="@+id/radiobutton2_time"
+            android:textSize="32px"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="45px"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="3dp"
+            android:button="@drawable/radiobutton_selector"
+            android:text="2小时" />
+        <RadioButton
+            android:id="@+id/radiobutton3_time"
+            android:textSize="32px"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="45px"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:paddingHorizontal="3dp"
+            android:button="@drawable/radiobutton_selector"
+            android:text="3小时" />
+        <RadioButton
+            android:id="@+id/radiobutton4_time"
+            android:textSize="32px"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="50px"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:paddingHorizontal="3dp"
+            android:button="@drawable/radiobutton_selector"
+            android:text="4小时" />
+        <RadioButton
+            android:id="@+id/radiobutton5_time"
+            android:textSize="32px"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="50px"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:paddingHorizontal="3dp"
+            android:button="@drawable/radiobutton_selector"
+            android:text="5小时" />
+        <RadioButton
+            android:id="@+id/radiobutton6_time"
+            android:textSize="32px"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="50px"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:paddingHorizontal="3dp"
+            android:button="@drawable/radiobutton_selector"
+            android:text="6小时" />
+
+
+    </RadioGroup>
 
     <ImageView
         android:id="@+id/image3_three"
@@ -339,27 +520,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="63px"
+        android:layout_marginTop="58px"
         android:layout_marginStart="12px"
         android:textColor="#FFFFFF"
         android:textSize="34px"
         app:layout_constraintStart_toEndOf="@+id/image2_three"
         app:layout_constraintTop_toBottomOf="@+id/tV4_three"
         android:text="定时调节" />
-
-    <SeekBar
-        android:id="@+id/seekBar2_three"
-        android:layout_width="930px"
-        android:layout_height="20px"
-        android:layout_marginStart="62px"
-        android:layout_marginEnd="45px"
-        android:layout_marginTop="65px"
-        app:layout_constraintStart_toEndOf="@+id/tV4_three"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar1_three"
-        android:max="100"
-        android:thumb="@drawable/bg_seek_bar_thumb2"
-        android:progressDrawable="@drawable/seekbar_progress"
-        android:progress="60" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

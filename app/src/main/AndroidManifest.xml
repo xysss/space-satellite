@@ -3,12 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.xysss.keeplearning">
 
-    <!-- 蓝牙权限 -->
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- 支持ble的设备 -->
-    <uses-feature
-        android:name="android.hardware.bluetooth_le"
-        android:required="true" /> <!-- 定位权限 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
@@ -57,9 +51,6 @@
             android:exported="true" />
         <activity
             android:name=".ui.activity.WebActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.activity.WeatherActivity"
             android:exported="true" />
         <activity
             android:name=".ui.activity.SplashActivity"

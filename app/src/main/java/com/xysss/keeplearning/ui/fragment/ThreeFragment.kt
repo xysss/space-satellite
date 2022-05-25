@@ -13,6 +13,7 @@ import com.xysss.keeplearning.app.util.ByteUtils
 import com.xysss.keeplearning.databinding.FragmentThreeBinding
 import com.xysss.keeplearning.serialport.SenderManager
 import com.xysss.keeplearning.serialport.SerialPortHelper
+import com.xysss.keeplearning.viewmodel.MainActivityViewModel
 import com.xysss.keeplearning.viewmodel.SettingViewModel
 import com.xysss.keeplearning.viewmodel.ThreeFragmentViewModel
 import com.xysss.mvvmhelper.ext.logE
@@ -22,7 +23,7 @@ import com.xysss.mvvmhelper.ext.logE
  * Time:2021/9/2811:16
  */
 
-class ThreeFragment : BaseFragment<ThreeFragmentViewModel, FragmentThreeBinding>() {
+class ThreeFragment : BaseFragment<MainActivityViewModel, FragmentThreeBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
 

@@ -9,13 +9,14 @@ import com.xysss.keeplearning.app.ext.bindViewPager2
 import com.xysss.keeplearning.app.ext.init
 import com.xysss.keeplearning.databinding.FragmentTwoBinding
 import com.xysss.keeplearning.viewmodel.HistoryTreeViewModel
+import com.xysss.keeplearning.viewmodel.MainActivityViewModel
 
 /**
  * Author:bysd-2
  * Time:2021/9/2811:16
  */
 
-class TwoFragment : BaseFragment<HistoryTreeViewModel, FragmentTwoBinding>() {
+class TwoFragment : BaseFragment<MainActivityViewModel, FragmentTwoBinding>() {
     var titleData= arrayListOf("数据记录","报警记录")
     //fragment集合
     private var fragments: ArrayList<Fragment> = arrayListOf()

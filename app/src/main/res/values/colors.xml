@@ -46,5 +46,7 @@
     <color name="gray_light">#EDEBEC</color>
     <color name="gray_dark">#989797</color>
 
+    <color name="color_577">#008577</color>
+
 
 </resources>

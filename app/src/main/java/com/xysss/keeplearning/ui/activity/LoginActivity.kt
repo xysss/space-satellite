@@ -66,8 +66,8 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         //监听登录结果
         mViewModel.loginData.observe(this){
             //做保存信息等操作
-            LogUtils.debugInfo(it.toString())
-            it.logA()
+            //通知登录成功
+            LiveDataEvent.loginEvent.value = true
             finish()
         }
     }

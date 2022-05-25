@@ -13,6 +13,13 @@
         android:background="@color/color_FEC"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="50px"
+            android:layout_height="32px"
+            android:layout_marginTop="18px"
+            android:layout_marginStart="10px"
+            android:src="@drawable/wifi_icon"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

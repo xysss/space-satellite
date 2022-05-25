@@ -7,6 +7,7 @@ import com.xysss.keeplearning.databinding.FragmentFourBinding
 import com.xysss.keeplearning.ui.activity.DemoActivity
 import com.xysss.keeplearning.ui.activity.SettingActivity
 import com.xysss.keeplearning.ui.activity.WebActivity
+import com.xysss.keeplearning.viewmodel.MainActivityViewModel
 import com.xysss.keeplearning.viewmodel.TestViewModel
 import com.xysss.mvvmhelper.ext.setOnclickNoRepeat
 import com.xysss.mvvmhelper.ext.toStartActivity
@@ -16,7 +17,7 @@ import com.xysss.mvvmhelper.ext.toStartActivity
  * Time:2021/9/2811:15
  */
 
-class FourFragment : BaseFragment<TestViewModel, FragmentFourBinding>() {
+class FourFragment : BaseFragment<MainActivityViewModel, FragmentFourBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
 
