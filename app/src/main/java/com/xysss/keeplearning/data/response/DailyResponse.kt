@@ -15,6 +15,6 @@ class DailyResponse(val status: String, val result: Result) {
 
     class LifeIndex(val coldRisk: List<LifeDescription>, val carWashing: List<LifeDescription>, val ultraviolet: List<LifeDescription>, val dressing: List<LifeDescription>)
 
-    class LifeDescription(val desc: String)
+    class LifeDescription(val desc: String,val index: Float)
 
 }

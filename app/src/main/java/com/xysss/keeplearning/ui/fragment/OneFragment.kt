@@ -3,6 +3,7 @@ package com.xysss.keeplearning.ui.fragment
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -51,13 +52,19 @@ class OneFragment : BaseFragment<MainActivityViewModel, FragmentOneBinding>(){
         //请求权限
         requestCameraPermissions()
 
-        refreshWeather()
-
         val layoutManager = LinearLayoutManager(mActivity)
         mViewBinding.recyclerView.layoutManager = layoutManager
         adapter = PlaceAdapter(this, mViewModel.placeList)
         mViewBinding.recyclerView.adapter = adapter
         mViewBinding.swipeRefresh.setColorSchemeResources(R.color.green_577)
+
+        val place = mViewModel.getSavedPlace()
+        mViewModel.locationLng =place.location.lng
+        mViewModel.locationLat =place.location.lat
+        mViewModel.placeName =place.name
+
+
+        refreshWeather()
 
         mViewBinding.searchPlaceEdit.addTextChangedListener { editable ->
             val content = editable.toString()
@@ -69,6 +76,10 @@ class OneFragment : BaseFragment<MainActivityViewModel, FragmentOneBinding>(){
                 mViewModel.placeList.clear()
                 adapter.notifyDataSetChanged()
             }
+        }
+
+        mViewBinding.swipeRefresh.setOnRefreshListener {
+            refreshWeather()
         }
 
         mViewBinding.drawerLayoutOne.addDrawerListener(object : DrawerLayout.DrawerListener {
@@ -94,14 +105,28 @@ class OneFragment : BaseFragment<MainActivityViewModel, FragmentOneBinding>(){
         mViewBinding.swipeRefresh.isRefreshing = true
     }
 
-
     private fun showWeatherInfo(weather: Weather) {
         mViewBinding.placeName.text = mViewModel.placeName+"今日天气"
         val realtime = weather.realtime
         val daily = weather.daily
         // 填充now.xml布局中数据
+        //温度
         val currentTempText = "${realtime.temperature.toInt()} ℃"
         mViewBinding.humidityOne.text = currentTempText
+        //湿度
+        val humidityText = "湿度: ${realtime.humidity} %"
+        mViewBinding.tV2One.text = humidityText
+        //风速
+        val windSpeedText = "风速: ${realtime.wind.speed}公里/每小时"
+        mViewBinding.tV4One.text = windSpeedText
+        //能见度
+        val visibilityText="能见度: ${realtime.visibility}公里"
+        mViewBinding.tV3One.text = visibilityText
+        //天气
+        val skyconText="${realtime.skycon}"
+        val sky1 = getSky(skyconText)
+        mViewBinding.image1One.setImageResource(sky1.icon)
+
         //mViewBinding.nowInclude.currentSky.text = getSky(realtime.skycon).info
         val currentPM25Text = "空气指数 ${realtime.airQuality.aqi.chn.toInt()}"
         //mViewBinding.nowInclude.currentAQI.text = currentPM25Text
@@ -130,7 +155,8 @@ class OneFragment : BaseFragment<MainActivityViewModel, FragmentOneBinding>(){
         val lifeIndex = daily.lifeIndex
         //mViewBinding.lifeIndexInclude.coldRiskText.text = lifeIndex.coldRisk[0].desc
         //mViewBinding.lifeIndexInclude.dressingText.text = lifeIndex.dressing[0].desc
-        //mViewBinding.lifeIndexInclude.ultravioletText.text = lifeIndex.ultraviolet[0].desc
+        //mViewBinding.tV5One.text = "紫外线指数: ${lifeIndex.ultraviolet[0].index}最大(10)"
+        mViewBinding.tV5One.text = "紫外线指数: ${lifeIndex.ultraviolet[0].desc}"
         //mViewBinding.lifeIndexInclude.carWashingText.text = lifeIndex.carWashing[0].desc
         mViewBinding.weatherLayout.visibility = View.VISIBLE
     }
@@ -191,9 +217,7 @@ class OneFragment : BaseFragment<MainActivityViewModel, FragmentOneBinding>(){
                 R.id.searchPlaceBtn->{
                     mViewBinding.drawerLayoutOne.openDrawer(GravityCompat.START)
                 }
-                R.id.swipeRefresh->{
-                    refreshWeather()
-                }
+
                 R.id.constraint1_one->{
                     // 发送数据
                     SerialPortHelper.portManager.send(
