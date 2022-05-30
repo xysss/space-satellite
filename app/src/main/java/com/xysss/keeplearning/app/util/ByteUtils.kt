@@ -15,7 +15,7 @@ import kotlin.experimental.xor
 object ByteUtils {
 
     const val FRAME_START: Byte = 0x55
-    const val FRAME_END: Byte = 0x23
+    const val FRAME_END: Byte = 0x23.toByte()
     const val FRAME_FF: Byte = 0xFF.toByte()
     const val FRAME_00: Byte = 0x00
 

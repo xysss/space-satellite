@@ -1,6 +1,8 @@
 package com.xysss.keeplearning.serialport.commond
 
 import com.serial.port.manage.command.protocol.BaseProtocol
+import com.xysss.keeplearning.app.util.ByteUtils
+import com.xysss.keeplearning.app.util.Crc8
 
 /**
  * 作者 : xys
@@ -9,8 +11,8 @@ import com.serial.port.manage.command.protocol.BaseProtocol
  */
 
 object SerialCommandProtocol : BaseProtocol() {
-    var baseStart = byteArrayOf(0xAA.toByte())
-    var baseEnd = byteArrayOf(0x00.toByte())
+    var baseStart = byteArrayOf(0x55.toByte())
+    var baseEnd = byteArrayOf(0x23.toByte())
 
     /**
      * 系统状态参数读取,检测机器状态信息
@@ -21,8 +23,7 @@ object SerialCommandProtocol : BaseProtocol() {
     /**
      * 读取主板版本号
      */
-    var readVersion = byteArrayOf(0xA9.toByte())
-    var readVersionStatus = byteArrayOf(0x00.toByte(), 0xAD.toByte())
+    var readVersion = byteArrayOf(0x55.toByte(),0x00.toByte(), 0xAD.toByte(),0x05.toByte(),0x02.toByte(),0x00.toByte(),0x00.toByte())
 
     /**
      * 升级指令
@@ -58,10 +59,10 @@ object SerialCommandProtocol : BaseProtocol() {
      * @return 0xAA 0xA9 0x00 0xAD
      */
     fun onCmdReadVersionStatus(): ByteArray {
+        val readVersion = readVersion+Crc8.cal_crc8_t(readVersion,readVersion.size) + ByteUtils.FRAME_END
+
         return buildControllerProtocol(
-            baseStart,
-            readVersion,
-            readVersionStatus
+            readVersion
         )
     }
 
