@@ -13,6 +13,6 @@ interface WeatherService {
     fun getRealtimeWeather(@Path("lng") lng: String, @Path("lat") lat: String): Call<RealtimeResponse>
 
     @GET("v2.6/${App.WeatherToken}/{lng},{lat}/daily")
-    fun getDailyWeather(@Path("lng") lng: String, @Path("lat") lat: String, @Query("dailysteps") dailySteps: Int =7): Call<DailyResponse>
+    fun getDailyWeather(@Path("lng") lng: String, @Path("lat") lat: String, @Query("dailysteps") dailySteps: Int =8): Call<DailyResponse>
 
 }

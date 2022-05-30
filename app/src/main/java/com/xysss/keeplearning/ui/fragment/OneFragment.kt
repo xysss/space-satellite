@@ -134,7 +134,7 @@ class OneFragment : BaseFragment<MainActivityViewModel, FragmentOneBinding>(){
         // 填充forecast.xml布局中的数据
         mViewBinding.forecastInclude.forecastLayout.removeAllViews()
         val days = daily.skycon.size
-        for (i in 0 until days) {
+        for (i in 1 until days) {
             val skycon = daily.skycon[i]
             val temperature = daily.temperature[i]
             val view = LayoutInflater.from(mActivity).inflate(R.layout.forecast_item, mViewBinding.forecastInclude.forecastLayout, false)

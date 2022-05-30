@@ -18,13 +18,15 @@ object ByteUtils {
     const val FRAME_END: Byte = 0x23
     const val FRAME_FF: Byte = 0xFF.toByte()
     const val FRAME_00: Byte = 0x00
-    const val FRAME_01:Byte=0x01
 
-    const val Msg80: Byte = 0x80.toByte()
-    const val Msg90: Byte = 0x90.toByte()
-    const val Msg81: Byte = 0x81.toByte()
-    const val MsgA1: Byte = 0xA1.toByte()
     const val MsgA0: Byte = 0xA0.toByte()
+
+    const val Msg03: Byte = 0x03.toByte()
+    const val Msg4F: Byte = 0x4F.toByte()
+    const val Msg41: Byte = 0x41.toByte()
+    const val Msg73: Byte = 0x73.toByte()
+
+
 
     fun secondToTimes(second: Int): String {
         var h = 0

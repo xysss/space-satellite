@@ -2,11 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="15dp">
+    android:layout_marginBottom="20px"
+    android:layout_marginStart="20px"
+    android:layout_marginEnd="20px"
+    >
 
     <TextView
         android:id="@+id/dateInfo"
         android:layout_width="0dp"
+        android:text="2022-05-30"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="4" />
@@ -14,6 +18,7 @@
     <ImageView
         android:id="@+id/skyIcon"
         android:layout_width="20dp"
+        android:src="@drawable/fine_day_icon"
         android:layout_height="20dp" />
 
     <TextView
@@ -22,12 +27,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="3"
+        android:text="晴"
         android:gravity="center" />
 
     <TextView
         android:id="@+id/temperatureInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="15～30度"
         android:layout_gravity="center_vertical"
         android:layout_weight="3"
         android:gravity="end" />

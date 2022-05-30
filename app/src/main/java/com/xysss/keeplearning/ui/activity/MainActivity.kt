@@ -262,28 +262,32 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
         mBytes?.let {
             when (it[4]) {
                 //设备信息
-                ByteUtils.Msg80 -> {
+                ByteUtils.Msg03 -> {
                     scope.launch(Dispatchers.IO) {
-                        dealMsg80(it)
+                        dealMsg03(it)
                     }
                 }
-                //实时数据
-                ByteUtils.Msg90 -> {
+                //设置设备工作模式响
+                ByteUtils.Msg4F -> {
                     scope.launch(Dispatchers.IO) {
-                        dealMsg90(it)
+                        dealMsg4F(it)
                     }
                 }
-                //历史记录
-                ByteUtils.Msg81 -> {
+                //获取设备净化功能响应
+                ByteUtils.Msg73 -> {
                     scope.launch(Dispatchers.IO) {
+                        dealMsg73(it)
                     }
                 }
-                //物质信息
-                ByteUtils.MsgA1 -> {
+                //数据响应/通知
+                ByteUtils.Msg41 -> {
                     scope.launch(Dispatchers.IO) {
-                        dealMsgA1(it)
+                        dealMsg41(it)
                     }
                 }
+
+
+
                 //物质库信息
                 ByteUtils.MsgA0 -> {
                     scope.launch(Dispatchers.IO) {
@@ -340,6 +344,46 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
         }
     }
 
+    private fun dealMsg03(mBytes: ByteArray) {
+        mBytes.let {
+            if (it.size == 33) {
+                //版本号
+                mmkv.putString(ValueKey.deviceHardwareVersion,it[7].toInt().toString()+":"+it[8].toInt().toString())
+                mmkv.putString(ValueKey.deviceSoftwareVersion,it[9].toInt().toString()+":"+it[10].toInt().toString())
+                //设备序列号
+                var i = 12
+                while (i < it.size)
+                    if (it[i] == ByteUtils.FRAME_00) break else i++
+                val tempBytes: ByteArray = it.readByteArrayBE(12, i - 12)
+                mmkv.putString(ValueKey.deviceId,String(tempBytes))
+                "设备信息解析成功: ${String(tempBytes)}".logE("xysLog")
+            }
+        }
+    }
+
+    private fun dealMsg4F(mBytes: ByteArray) {
+        mBytes.let {
+            if (it.size == 10) {
+                "解析成功: ${it[9].toInt()}".logE("xysLog")
+            }
+        }
+    }
+
+    private fun dealMsg73(mBytes: ByteArray) {
+        mBytes.let {
+            if (it.size == 11) {
+                "解析成功: ${it[9].toInt()}，${it[10].toInt()}".logE("xysLog")
+            }
+        }
+    }
+
+    private fun dealMsg41(mBytes: ByteArray) {
+        mBytes.let {
+            if (it.size > 11) {
+                "解析成功: ${it[9].toInt()}，${it[10].toInt()}".logE("xysLog")
+            }
+        }
+    }
 
     private fun dealMsg80(mBytes: ByteArray) {
         mBytes.let {
