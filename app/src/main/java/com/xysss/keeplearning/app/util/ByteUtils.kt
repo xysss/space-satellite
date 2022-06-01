@@ -19,12 +19,19 @@ object ByteUtils {
     const val FRAME_FF: Byte = 0xFF.toByte()
     const val FRAME_00: Byte = 0x00
 
-    const val MsgA0: Byte = 0xA0.toByte()
-
     const val Msg03: Byte = 0x03.toByte()
     const val Msg4F: Byte = 0x4F.toByte()
     const val Msg41: Byte = 0x41.toByte()
     const val Msg73: Byte = 0x73.toByte()
+
+    const val Msg26: Byte = 0x26.toByte()
+    const val Msg60: Byte = 0x60.toByte()
+    const val Msg61: Byte = 0x61.toByte()
+    const val Msg62: Byte = 0x62.toByte()
+    const val Msg63: Byte = 0x63.toByte()
+    const val Msg64: Byte = 0x64.toByte()
+    const val Msg65: Byte = 0x65.toByte()
+    const val Msg66: Byte = 0x66.toByte()
 
 
 

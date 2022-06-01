@@ -3,10 +3,14 @@ package com.xysss.keeplearning.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.serial.port.manage.data.WrapReceiverData
 import com.xysss.keeplearning.data.repository.WeatherRepository
 import com.xysss.keeplearning.data.response.Location
 import com.xysss.keeplearning.data.response.MaterialInfo
 import com.xysss.keeplearning.data.response.Place
+import com.xysss.keeplearning.serialport.ProtocolAnalysis
+import com.xysss.keeplearning.serialport.SerialPortHelper
+import com.xysss.keeplearning.serialport.model.Msg41DataModel
 import com.xysss.mvvmhelper.base.BaseViewModel
 
 /**
@@ -16,22 +20,9 @@ import com.xysss.mvvmhelper.base.BaseViewModel
  */
 class MainActivityViewModel :BaseViewModel(){
 
-    val bleDate: LiveData<MaterialInfo> get() = _bleDate
-    val bleState: LiveData<String> get() = _bleState
-    val progressNum: LiveData<Int> get() = _progressNum
-    val numShow: LiveData<String> get() = _numShow
-
-    private val _bleDate= MutableLiveData<MaterialInfo>()
-    private val _bleState= MutableLiveData<String>()
-    private val _progressNum= MutableLiveData<Int>()
-    private val _numShow= MutableLiveData<String>()
-
     private val locationLiveData = MutableLiveData<Location>()
-
     var locationLng = ""
-
     var locationLat = ""
-
     var placeName = ""
 
     val weatherLiveData = Transformations.switchMap(locationLiveData) { location ->
@@ -59,5 +50,4 @@ class MainActivityViewModel :BaseViewModel(){
     fun getSavedPlace() = WeatherRepository.getSavedPlace()
 
     fun isPlaceSaved() = WeatherRepository.isPlaceSaved()
-
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.RadioGroup
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.activityViewModels
 import com.serial.port.kit.core.common.TypeConversion
 import com.serial.port.manage.data.WrapReceiverData
 import com.serial.port.manage.data.WrapSendData
@@ -15,6 +16,8 @@ import com.xysss.keeplearning.databinding.FragmentThreeBinding
 import com.xysss.keeplearning.serialport.SenderManager
 import com.xysss.keeplearning.serialport.SerialPortHelper
 import com.xysss.keeplearning.viewmodel.MainActivityViewModel
+import com.xysss.keeplearning.viewmodel.ShellMainSharedViewModel
+import com.xysss.keeplearning.viewmodel.ThreeFragmentViewModel
 import com.xysss.mvvmhelper.ext.logE
 import com.xysss.mvvmhelper.ext.setOnclickNoRepeat
 
@@ -23,7 +26,10 @@ import com.xysss.mvvmhelper.ext.setOnclickNoRepeat
  * Time:2021/9/2811:16
  */
 
-class ThreeFragment : BaseFragment<MainActivityViewModel, FragmentThreeBinding>() {
+class ThreeFragment : BaseFragment<ThreeFragmentViewModel, FragmentThreeBinding>() {
+
+    //获取共享ViewModel
+    private val shellMainSharedViewModel: ShellMainSharedViewModel by activityViewModels()
 
     override fun initView(savedInstanceState: Bundle?) {
 
@@ -92,21 +98,6 @@ class ThreeFragment : BaseFragment<MainActivityViewModel, FragmentThreeBinding>(
         ) {
             when (it.id) {
                 R.id.line1_three->{
-                    SerialPortHelper.portManager.send(
-                        WrapSendData(SenderManager.getSender().sendReadVersion()),
-                        object : OnDataReceiverListener {
-                            override fun onSuccess(data: WrapReceiverData) {
-                                "响应数据：${TypeConversion.bytes2HexString(data.data)}".logE(logFlag)
-                            }
-
-                            override fun onFailed(wrapSendData: WrapSendData, msg: String) {
-                                "发送数据: ${TypeConversion.bytes2HexString(wrapSendData.sendData)}, $msg".logE(logFlag)
-                            }
-
-                            override fun onTimeOut() {
-                                "发送或者接收超时".logE(logFlag)
-                            }
-                        })
                 }
                 R.id.line3_three->{
                 }
@@ -124,5 +115,9 @@ class ThreeFragment : BaseFragment<MainActivityViewModel, FragmentThreeBinding>(
     override fun initObserver() {
         super.initObserver()
 
+        shellMainSharedViewModel.msg41Date.observe(this){
+
+            it.toString().logE(logFlag)
         }
     }
+}

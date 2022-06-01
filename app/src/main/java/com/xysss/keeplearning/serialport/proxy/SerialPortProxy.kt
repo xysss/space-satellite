@@ -33,7 +33,7 @@ class SerialPortProxy {
             // 设备地址
             .path("/dev/ttyS4")
             // 波特率
-            .baudRate(9600)
+            .baudRate(115200)
             // Byte数组最大接收内存
             .maxSize(1024)
             // 发送失败重试次数

@@ -2,6 +2,7 @@ package com.xysss.keeplearning.ui.activity
 
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.blankj.utilcode.util.ToastUtils
 import com.serial.port.kit.core.common.TypeConversion
@@ -32,6 +33,7 @@ import com.xysss.keeplearning.serialport.model.SystemStateModel
 import com.xysss.keeplearning.ui.adapter.MainAdapter
 import com.xysss.keeplearning.ui.fragment.OneFragment
 import com.xysss.keeplearning.viewmodel.MainActivityViewModel
+import com.xysss.keeplearning.viewmodel.ShellMainSharedViewModel
 import com.xysss.keeplearning.viewmodel.TestViewModel
 import com.xysss.mvvmhelper.base.appContext
 import com.xysss.mvvmhelper.ext.hideStatusBar
@@ -46,7 +48,8 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
         private const val TAG = "MainActivity"
     }
 
-
+    //这个是共享ViewModel
+    private val sharedViewModel: ShellMainSharedViewModel by viewModels()
 
     override fun initView(savedInstanceState: Bundle?) {
 
@@ -65,6 +68,8 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
             val open = SerialPortHelper.portManager.open()
             "串口打开${if (open) "成功" else "失败"}".logE(logFlag)
         }
+
+        sharedViewModel.setListener()
 
     }
 
@@ -97,7 +102,8 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
         super.onDestroy()
         //取消协程
         job.cancel()
-
+        // 移除统一监听回调
+        SerialPortHelper.portManager.removeDataPickListener(onDataPickListener)
         // 关闭串口
         val close = SerialPortHelper.portManager.close()
         "串口关闭${if (close) "成功" else "失败"}".logE(logFlag)
@@ -128,8 +134,7 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
 
     override fun onPause() {
         super.onPause()
-        // 移除统一监听回调
-        SerialPortHelper.portManager.removeDataPickListener(onDataPickListener)
+
     }
 
     override fun onResume() {
@@ -137,7 +142,7 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
         // 增加统一监听回调
         SerialPortHelper.portManager.addDataPickListener(onDataPickListener)
         scope.launch(Dispatchers.IO) {
-            SerialPortHelper.startDealMessage()
+            sharedViewModel.protocolAnalysis.startDealMessage()
         }
     }
 
@@ -147,7 +152,7 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
 
             scope.launch(Dispatchers.IO) {
                 for (byte in data.data)
-                    SerialPortHelper.addRecLinkedDeque(byte)
+                    sharedViewModel.protocolAnalysis.addRecLinkedDeque(byte)
             }
         }
     }
