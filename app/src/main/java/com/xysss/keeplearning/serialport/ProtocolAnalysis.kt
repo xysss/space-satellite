@@ -146,6 +146,12 @@ class ProtocolAnalysis {
                         dealMsg73(it)
                     }
                 }
+                //设置设备净化数据响应
+                ByteUtils.Msg56 -> {
+                    scope.launch(Dispatchers.IO) {
+                        dealMsg56(it)
+                    }
+                }
                 //数据响应，通知
                 ByteUtils.Msg41 -> {
                     scope.launch(Dispatchers.IO) {
@@ -165,12 +171,12 @@ class ProtocolAnalysis {
                 mmkv.putString(ValueKey.deviceHardwareVersion,it[7].toInt().toString()+":"+it[8].toInt().toString())
                 mmkv.putString(ValueKey.deviceSoftwareVersion,it[9].toInt().toString()+":"+it[10].toInt().toString())
                 //设备序列号
-                var i = 12
+                var i = 11
                 while (i < it.size)
                     if (it[i] == ByteUtils.FRAME_00) break else i++
-                val tempBytes: ByteArray = it.readByteArrayBE(12, i - 12)
+                val tempBytes: ByteArray = it.readByteArrayBE(11, i - 11)
                 mmkv.putString(ValueKey.deviceId,String(tempBytes))
-                "设备信息解析成功: ${String(tempBytes)}".logE("xysLog")
+                "设备信息响应成功: ${String(tempBytes)}".logE("xysLog")
             }
         }
     }
@@ -178,15 +184,33 @@ class ProtocolAnalysis {
     private fun dealMsg4F(mBytes: ByteArray) {
         mBytes.let {
             if (it.size == 10) {
-                "解析成功: ${it[9].toInt()}".logE("xysLog")
+                if (it[7].toInt()==0)
+                    "设备工作模式响应成功".logE("xysLog")
+                else if (it[7].toInt()==1){
+                    "设备工作模式响应失败".logE("xysLog")
+                }
             }
         }
     }
 
     private fun dealMsg73(mBytes: ByteArray) {
         mBytes.let {
-            if (it.size == 11) {
-                "解析成功: ${it[9].toInt()}，${it[10].toInt()}".logE("xysLog")
+            if (it.size == 13) {
+                val timing=it.readByteArrayBE(7, 2).readInt32LE().toString()
+                val speed=it[9].toInt().toString()
+                "设备净化功能响应成功: $timing,$speed".logE("xysLog")
+            }
+        }
+    }
+
+    private fun dealMsg56(mBytes: ByteArray) {
+        mBytes.let {
+            if (it.size == 10) {
+                if (it[7].toInt()==0)
+                    "设置设备净化数据响应成功".logE("xysLog")
+                else if (it[7].toInt()==1){
+                    "设置设备净化数据响应失败".logE("xysLog")
+                }
             }
         }
     }
@@ -198,10 +222,10 @@ class ProtocolAnalysis {
                 //传感器数据
                 if (it[7]== ByteUtils.Msg26){
                     sensorStatus=it[10].toInt().toString()
-                    voc=String.format("%.2f", it.readByteArrayBE(11, 4).readFloatLE())
+                    voc=it.readByteArrayBE(11, 4).readFloatLE().toInt().toString()
                     dust=String.format("%.2f", it.readByteArrayBE(15, 4).readFloatLE())
-                    temp=String.format("%.2f", it.readByteArrayBE(19, 4).readFloatLE())
-                    dumity=String.format("%.2f", it.readByteArrayBE(23, 4).readFloatLE())
+                    temp=it.readByteArrayBE(19, 4).readFloatLE().toInt().toString()
+                    dumity=it.readByteArrayBE(23, 4).readFloatLE().toInt().toString()
                 }
                 //三个NFC数据
                 if (it[27]== ByteUtils.Msg60){

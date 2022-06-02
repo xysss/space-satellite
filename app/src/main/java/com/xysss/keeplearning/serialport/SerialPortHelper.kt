@@ -68,84 +68,79 @@ object SerialPortHelper {
      *
      * @param listener 监听回调
      */
-    fun readVersion(listener: OnReadVersionListener?) {
-        val sends: ByteArray = SenderManager.getSender().sendReadVersion()
-        val isSuccess: Boolean =
-            serialPortManager.send(
-                WrapSendData(sends, 3000, 300, 1),
+    fun readVersion() {
+        val sends: ByteArray = SerialCommandProtocol.onCmdReadVersionStatus()
+        val isSuccess: Boolean = serialPortManager.send(WrapSendData(sends, 3000, 300, 1),
                 object : OnDataReceiverListener {
                     override fun onSuccess(data: WrapReceiverData) {
                         val buffer: ByteArray = data.data
                     }
-
                     override fun onFailed(wrapSendData: WrapSendData, msg: String) {
-                        Log.e(TAG, "onFailed: $msg")
+                       "onFailed: $msg".logE(logFlag)
                     }
-
                     override fun onTimeOut() {
-                        Log.d(TAG, "onTimeOut: 发送数据或者接收数据超时")
+                        "onTimeOut: 发送数据或者接收数据超时".logE(logFlag)
                     }
                 })
         printLog(isSuccess, sends)
     }
 
-
-    /**
-     * 读取设备信息
-     *
-     * @param listener 监听回调
-     */
-    fun readSystemState(listener: OnReadSystemStateListener?) {
-        val sends: ByteArray = SenderManager.getSender().sendStartDetect()
-        val isSuccess: Boolean =
-            serialPortManager.send(WrapSendData(sends), object : OnDataReceiverListener {
-
-                override fun onSuccess(data: WrapReceiverData) {
-                    val buffer = data.data
-                    if (checkCallData(buffer)) {
-                        //输入电压
-                        val inputVoltage = buffer[3] * 0.1
-                        //电机电压
-                        val motorVoltage = buffer[4] * 0.1
-                        //VCC电压
-                        val vccVoltage = buffer[5] * 0.1
-                        //MCU电压
-                        val mcuVoltage = buffer[6] * 0.1
-                        //温度值
-                        val bytes = ByteArray(1)
-                        bytes[0] = buffer[7]
-                        val temperature: Int =
-                            TypeConversion.bytes2HexString(bytes)?.substring(0, 2)?.toInt(16) ?: 0
-                        //照度值
-                        val illumination: Int =
-                            ((buffer[8] and 0xFF.toByte()).toInt() shl 8) + (buffer[9] and 0xFF.toByte())
-                        listener?.let {
-                            runOnUiThread {
-                                listener.onResult(
-                                    SystemStateModel(
-                                        inputVoltage,
-                                        motorVoltage,
-                                        vccVoltage,
-                                        mcuVoltage,
-                                        temperature,
-                                        illumination
-                                    )
-                                )
-                            }
-                        }
+    //设置设备工作模式请求
+    fun setWorkModel(byte: Byte) {
+        val sends: ByteArray = SerialCommandProtocol.onCmdSetWorkModel(byte)
+        val isSuccess: Boolean = serialPortManager.send(WrapSendData(sends, 3000, 300, 1),
+                object : OnDataReceiverListener {
+                    override fun onSuccess(data: WrapReceiverData) {
+                        val buffer: ByteArray = data.data
                     }
-                }
+                    override fun onFailed(wrapSendData: WrapSendData, msg: String) {
+                        "onFailed: $msg".logE(logFlag)
+                    }
+                    override fun onTimeOut() {
+                        "onTimeOut: 发送数据或者接收数据超时".logE(logFlag)
+                    }
+                })
+        printLog(isSuccess, sends)
+    }
 
+    //获取设备净化功能请求
+    fun getDevicePurifyReq() {
+        val sends: ByteArray = SerialCommandProtocol.onCmdGetDevicePurifyReq()
+        val isSuccess: Boolean = serialPortManager.send(WrapSendData(sends, 3000, 300, 1),
+            object : OnDataReceiverListener {
+                override fun onSuccess(data: WrapReceiverData) {
+                    val buffer: ByteArray = data.data
+                }
                 override fun onFailed(wrapSendData: WrapSendData, msg: String) {
-                    Log.e(TAG, "onFailed: $msg")
+                    "onFailed: $msg".logE(logFlag)
                 }
-
                 override fun onTimeOut() {
-                    Log.d(TAG, "onTimeOut: 发送数据或者接收数据超时")
+                    "onTimeOut: 发送数据或者接收数据超时".logE(logFlag)
                 }
             })
         printLog(isSuccess, sends)
     }
+
+    //设置设备净化数据请求
+    fun setDevicePurifyReq(timing :Int,speed:Int) {
+        val sends: ByteArray = SerialCommandProtocol.onCmdSetDevicePurifyReq(timing,speed)
+        val isSuccess: Boolean = serialPortManager.send(WrapSendData(sends, 3000, 300, 1),
+            object : OnDataReceiverListener {
+                override fun onSuccess(data: WrapReceiverData) {
+                    val buffer: ByteArray = data.data
+                }
+                override fun onFailed(wrapSendData: WrapSendData, msg: String) {
+                    "onFailed: $msg".logE(logFlag)
+                }
+                override fun onTimeOut() {
+                    "onTimeOut: 发送数据或者接收数据超时".logE(logFlag)
+                }
+            })
+        printLog(isSuccess, sends)
+    }
+
+
+
 
     /**
      * 检测回调数据是否符合要求
@@ -169,10 +164,7 @@ object SerialPortHelper {
      */
     private fun printLog(isSuccess: Boolean, bytes: ByteArray) {
         val tempData = TypeConversion.bytes2HexString(bytes)
-        Log.d(
-            TAG,
-            "buildControllerProtocol:" + tempData + "，结果=" + if (isSuccess) "发送成功" else "发送失败"
-        )
+        "buildControllerProtocol:" + tempData + "，结果=" + if (isSuccess) "发送成功" else "发送失败".logE(logFlag)
     }
 
     /**

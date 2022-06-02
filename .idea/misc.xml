@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/drawable/shape_home_background.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/shape_login_btn.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/shape_login_edit.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/switch_choice.xml" value="0.228" />
         <entry key="app/src/main/res/layout/activity_list.xml" value="0.1609375" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3640625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5152027027027027" />

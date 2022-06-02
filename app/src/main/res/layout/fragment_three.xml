@@ -21,7 +21,7 @@
             android:id="@+id/tV15_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="85px"
+            android:layout_marginStart="80px"
             android:layout_marginTop="140px"
             android:text="PM2.5"
             android:textSize="40px"
@@ -34,9 +34,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20px"
-            android:layout_marginTop="57px"
+            android:layout_marginTop="60px"
             android:text="20"
-            android:textSize="140px"
+            android:textSize="110px"
             android:textColor="#F1F9FF"
             app:layout_constraintTop_toTopOf="@+id/constraint1_three"
             app:layout_constraintStart_toEndOf="@id/tV15_three"/>
@@ -47,56 +47,45 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20px"
             android:layout_marginTop="137px"
-            android:text="μg/m"
+            android:text="mg/m³"
             android:textSize="40px"
             android:textColor="#F1F9FF"
             app:layout_constraintTop_toTopOf="@+id/constraint1_three"
             app:layout_constraintStart_toEndOf="@id/tV16_three"/>
 
-        <TextView
-            android:id="@+id/tV6_three"
-            android:layout_width="430px"
-            android:layout_height="140px"
-            android:layout_marginStart="85px"
-            android:layout_marginTop="56px"
-            android:text=""
-            android:textSize="26px"
-            android:textColor="#F1F9FF"
-            app:layout_constraintTop_toTopOf="@+id/constraint1_three"
-            app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
             android:id="@+id/tV7_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50px"
-            android:layout_marginTop="72px"
+            android:layout_marginTop="60px"
             android:text="温度"
             android:textSize="26px"
             android:textColor="#FFFFFF"
-            app:layout_constraintTop_toBottomOf="@+id/tV6_three"
+            app:layout_constraintTop_toBottomOf="@+id/tV16_three"
             app:layout_constraintStart_toStartOf="parent"/>
         <TextView
             android:id="@+id/tV8_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="109px"
-            android:layout_marginTop="72px"
+            android:layout_marginTop="60px"
             android:text="湿度"
             android:textSize="26px"
             android:textColor="#FFFFFF"
-            app:layout_constraintTop_toBottomOf="@+id/tV6_three"
+            app:layout_constraintTop_toBottomOf="@+id/tV16_three"
             app:layout_constraintStart_toEndOf="@id/tV7_three"/>
         <TextView
             android:id="@+id/tV9_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="113px"
-            android:layout_marginTop="72px"
+            android:layout_marginTop="60px"
             android:text="VOC"
             android:textSize="26px"
             android:textColor="#FFFFFF"
-            app:layout_constraintTop_toBottomOf="@+id/tV6_three"
+            app:layout_constraintTop_toBottomOf="@+id/tV16_three"
             app:layout_constraintStart_toEndOf="@id/tV8_three"/>
         <View
             android:id="@+id/view1_three"
@@ -106,7 +95,7 @@
             android:layout_marginTop="89px"
             android:layout_marginStart="70px"
             app:layout_constraintStart_toEndOf="@+id/tV7_three"
-            app:layout_constraintTop_toBottomOf="@+id/tV6_three"/>
+            app:layout_constraintTop_toBottomOf="@+id/tV16_three"/>
         <View
             android:id="@+id/view2_three"
             android:layout_width="1px"
@@ -115,7 +104,7 @@
             android:layout_marginTop="89px"
             android:layout_marginStart="70px"
             app:layout_constraintStart_toEndOf="@+id/tV8_three"
-            app:layout_constraintTop_toBottomOf="@+id/tV6_three"/>
+            app:layout_constraintTop_toBottomOf="@+id/tV16_three"/>
         <TextView
             android:id="@+id/tV10_three"
             android:layout_width="wrap_content"
@@ -214,7 +203,7 @@
         android:layout_height="40px"
         android:layout_marginTop="44px"
         android:layout_marginStart="10px"
-        android:src="@drawable/switch_on"
+        android:src="@drawable/switch_off_icon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/tV3_three" />
 

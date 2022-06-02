@@ -1,6 +1,8 @@
 package com.xysss.keeplearning.serialport.commond
 
 import com.serial.port.manage.command.protocol.BaseProtocol
+import com.swallowsonny.convertextlibrary.writeInt16LE
+import com.swallowsonny.convertextlibrary.writeInt8
 import com.xysss.keeplearning.app.util.ByteUtils
 import com.xysss.keeplearning.app.util.Crc8
 
@@ -23,7 +25,49 @@ object SerialCommandProtocol : BaseProtocol() {
     /**
      * 读取主板版本号
      */
-    var readVersion = byteArrayOf(0x55.toByte(),0x00.toByte(), 0xAD.toByte(),0x05.toByte(),0x02.toByte(),0x00.toByte(),0x00.toByte())
+    private var readVersion = byteArrayOf(
+        0x55.toByte(),
+        0x00.toByte(),
+        0x09.toByte(),
+        0x00.toByte(),
+        0x02.toByte(),
+        0x00.toByte(),
+        0x00.toByte()
+    )
+
+    //设置工作模式
+    private var setWorkModel = byteArrayOf(
+        0x55.toByte(),
+        0x00.toByte(),
+        0x0A.toByte(),
+        0x00.toByte(),
+        0x4E.toByte(),
+        0x00.toByte(),
+        0x01.toByte()
+    )
+
+    //获取设备净化功能请求
+    var getDevicePurifyReq = byteArrayOf(
+        0x55.toByte(),
+        0x00.toByte(),
+        0x09.toByte(),
+        0x00.toByte(),
+        0x72.toByte(),
+        0x00.toByte(),
+        0x00.toByte()
+    )
+
+    //设置设备净化功能请求
+    var setDevicePurifyReq = byteArrayOf(
+        0x55.toByte(),
+        0x00.toByte(),
+        0x0D.toByte(),
+        0x00.toByte(),
+        0x72.toByte(),
+        0x00.toByte(),
+        0x04.toByte()
+    )
+
 
     /**
      * 升级指令
@@ -31,8 +75,10 @@ object SerialCommandProtocol : BaseProtocol() {
     var upgrade = byteArrayOf(0xAA.toByte())
     var readyForUpgrade = byteArrayOf(0x01.toByte(), 0x00.toByte(), 0xAB.toByte())
 
-    var testCommond = byteArrayOf(0x55.toByte(), 0x00.toByte(), 0x0A.toByte(), 0x09.toByte(),
-        0x00.toByte(), 0x00.toByte(), 0x01.toByte(), 0x00.toByte(), 0x00.toByte(), 0x23.toByte())
+    var testCommond = byteArrayOf(
+        0x55.toByte(), 0x00.toByte(), 0x0A.toByte(), 0x09.toByte(),
+        0x00.toByte(), 0x00.toByte(), 0x01.toByte(), 0x00.toByte(), 0x00.toByte(), 0x23.toByte()
+    )
 
     /**
      * 检查机器运行状态信息
@@ -59,11 +105,41 @@ object SerialCommandProtocol : BaseProtocol() {
      * @return 0xAA 0xA9 0x00 0xAD
      */
     fun onCmdReadVersionStatus(): ByteArray {
-        val readVersion = readVersion+Crc8.cal_crc8_t(readVersion,readVersion.size) + ByteUtils.FRAME_END
+        return this.readVersion + Crc8.cal_crc8_t(
+            this.readVersion,
+            this.readVersion.size
+        ) + ByteUtils.FRAME_END
+    }
 
-        return buildControllerProtocol(
-            readVersion
-        )
+
+    fun onCmdSetWorkModel(byte: Byte): ByteArray {
+        val resultByte = setWorkModel + byte
+        return resultByte + Crc8.cal_crc8_t(
+            resultByte,
+            resultByte.size
+        ) + ByteUtils.FRAME_END
+    }
+
+    fun onCmdGetDevicePurifyReq(): ByteArray {
+        return this.getDevicePurifyReq + Crc8.cal_crc8_t(
+            this.getDevicePurifyReq,
+            this.getDevicePurifyReq.size
+        ) + ByteUtils.FRAME_END
+    }
+
+    fun onCmdSetDevicePurifyReq(timing: Int, speed: Int): ByteArray {
+
+        val timingByteArray = ByteArray(2)
+        timingByteArray.writeInt16LE(timing)
+        val speedByteArray = ByteArray(1)
+        speedByteArray.writeInt8(speed)
+
+        val resultByte = setDevicePurifyReq + timingByteArray + speedByteArray + ByteUtils.Msg00
+
+        return resultByte + Crc8.cal_crc8_t(
+            resultByte,
+            resultByte.size
+        ) + ByteUtils.FRAME_END
     }
 
     /**
