@@ -68,6 +68,17 @@ object SerialCommandProtocol : BaseProtocol() {
         0x04.toByte()
     )
 
+    //设置设备消毒功能请求
+    var setDeviceDisinfectReq = byteArrayOf(
+        0x55.toByte(),
+        0x00.toByte(),
+        0x0A.toByte(),
+        0x00.toByte(),
+        0x50.toByte(),
+        0x00.toByte(),
+        0x01.toByte()
+    )
+
 
     /**
      * 升级指令
@@ -128,7 +139,6 @@ object SerialCommandProtocol : BaseProtocol() {
     }
 
     fun onCmdSetDevicePurifyReq(timing: Int, speed: Int): ByteArray {
-
         val timingByteArray = ByteArray(2)
         timingByteArray.writeInt16LE(timing)
         val speedByteArray = ByteArray(1)
@@ -136,6 +146,14 @@ object SerialCommandProtocol : BaseProtocol() {
 
         val resultByte = setDevicePurifyReq + timingByteArray + speedByteArray + ByteUtils.Msg00
 
+        return resultByte + Crc8.cal_crc8_t(
+            resultByte,
+            resultByte.size
+        ) + ByteUtils.FRAME_END
+    }
+
+    fun onCmdSetDeviceDisinfectReq(byte: Byte): ByteArray {
+        val resultByte = setDeviceDisinfectReq + byte
         return resultByte + Crc8.cal_crc8_t(
             resultByte,
             resultByte.size

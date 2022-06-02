@@ -147,9 +147,9 @@ class ProtocolAnalysis {
                     }
                 }
                 //设置设备净化数据响应
-                ByteUtils.Msg56 -> {
+                ByteUtils.Msg57 -> {
                     scope.launch(Dispatchers.IO) {
-                        dealMsg56(it)
+                        dealMsg57(it)
                     }
                 }
                 //数据响应，通知
@@ -158,6 +158,14 @@ class ProtocolAnalysis {
                         dealMsg41(it)
                     }
                 }
+                //数据响应，通知
+                ByteUtils.Msg51 -> {
+                    scope.launch(Dispatchers.IO) {
+                        dealMsg51(it)
+                    }
+                }
+
+
 
                 else -> it[4].toInt().logE("xysLog")
             }
@@ -203,7 +211,19 @@ class ProtocolAnalysis {
         }
     }
 
-    private fun dealMsg56(mBytes: ByteArray) {
+    private fun dealMsg57(mBytes: ByteArray) {
+        mBytes.let {
+            if (it.size == 10) {
+                if (it[7].toInt()==0)
+                    "设备消毒功能响应成功".logE("xysLog")
+                else if (it[7].toInt()==1){
+                    "设备消毒功能响应失败".logE("xysLog")
+                }
+            }
+        }
+    }
+
+    private fun dealMsg51(mBytes: ByteArray) {
         mBytes.let {
             if (it.size == 10) {
                 if (it[7].toInt()==0)

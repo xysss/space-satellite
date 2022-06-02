@@ -93,6 +93,7 @@ class ThreeFragment : BaseFragment<ThreeFragmentViewModel, FragmentThreeBinding>
 
         //设置设备时间和风速
         SerialPortHelper.setDevicePurifyReq(1000,20)
+
     }
 
     override fun onBindViewClick() {
@@ -104,9 +105,13 @@ class ThreeFragment : BaseFragment<ThreeFragmentViewModel, FragmentThreeBinding>
                 R.id.image1_three->{
                     switchFlag = if (switchFlag){
                         mViewBinding.image1Three.setImageResource(R.drawable.switch_off_icon)
+                        //设置设备消毒功能请求
+                        SerialPortHelper.setDeviceDisinfectReq(ByteUtils.Msg00)
                         false
                     }else{
                         mViewBinding.image1Three.setImageResource(R.drawable.switch_on_icon)
+                        //设置设备消毒功能请求
+                        SerialPortHelper.setDeviceDisinfectReq(ByteUtils.Msg01)
                         true
                     }
                 }

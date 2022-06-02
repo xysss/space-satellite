@@ -25,6 +25,8 @@ object ByteUtils {
     const val Msg73: Byte = 0x73.toByte()
 
     const val Msg56: Byte = 0x56.toByte()
+    const val Msg51: Byte = 0x51.toByte()
+    const val Msg57: Byte = 0x57.toByte()
     const val Msg26: Byte = 0x26.toByte()
     const val Msg60: Byte = 0x60.toByte()
     const val Msg61: Byte = 0x61.toByte()
