@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="17px"
                     android:layout_marginTop="38px"
-                    android:text="顺义区今日天气"
+                    android:text="请选择地区"
                     android:textColor="#F1F9FF"
                     android:textSize="32px"
                     app:layout_constraintStart_toEndOf="@+id/searchPlaceBtn"

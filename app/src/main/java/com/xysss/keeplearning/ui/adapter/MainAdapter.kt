@@ -26,10 +26,10 @@ class MainAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
 
     init {
         fragments.put(PAGE_ONE, OneFragment())
-        fragments.put(PAGE_TWO, TwoFragment())
-        fragments.put(PAGE_THREE, ThreeFragment())
-        fragments.put(PAGE_FOUR, FourFragment())
-        fragments.put(PAGE_FIVE, FiveFragment())
+        fragments.put(PAGE_THREE, FiveFragment())
+        fragments.put(PAGE_TWO, ThreeFragment())
+        //fragments.put(PAGE_FOUR, FourFragment())
+        //fragments.put(PAGE_FIVE, FiveFragment())
     }
 
     override fun createFragment(position: Int): Fragment {

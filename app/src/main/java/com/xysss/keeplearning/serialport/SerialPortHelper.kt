@@ -7,27 +7,12 @@ import com.serial.port.kit.core.common.TypeConversion
 import com.serial.port.manage.SerialPortManager
 import com.serial.port.manage.data.WrapReceiverData
 import com.serial.port.manage.data.WrapSendData
-import com.serial.port.manage.listener.OnDataPickListener
 import com.serial.port.manage.listener.OnDataReceiverListener
 import com.swallowsonny.convertextlibrary.*
 import com.xysss.keeplearning.app.ext.*
-import com.xysss.keeplearning.app.room.Matter
-import com.xysss.keeplearning.app.util.ByteUtils
-import com.xysss.keeplearning.app.util.Crc8
-import com.xysss.keeplearning.data.annotation.ValueKey
-import com.xysss.keeplearning.data.repository.Repository
-import com.xysss.keeplearning.data.response.MaterialInfo
 import com.xysss.keeplearning.serialport.commond.SerialCommandProtocol
-import com.xysss.keeplearning.serialport.listener.OnReadSystemStateListener
-import com.xysss.keeplearning.serialport.listener.OnReadVersionListener
-import com.xysss.keeplearning.serialport.model.DeviceVersionModel
-import com.xysss.keeplearning.serialport.model.NfcModel
-import com.xysss.keeplearning.serialport.model.SystemStateModel
 import com.xysss.keeplearning.serialport.proxy.SerialPortProxy
 import com.xysss.mvvmhelper.ext.logE
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlin.experimental.and
 
 /**
  * 作者 : xys

@@ -92,7 +92,7 @@ class ThreeFragment : BaseFragment<ThreeFragmentViewModel, FragmentThreeBinding>
         SerialPortHelper.getDevicePurifyReq()
 
         //设置设备时间和风速
-        SerialPortHelper.setDevicePurifyReq(1000,20)
+        //SerialPortHelper.setDevicePurifyReq(1000,20)
 
     }
 
